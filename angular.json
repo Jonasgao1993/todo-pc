@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-electron": {
+    "todowork": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -22,9 +22,15 @@
               "src/favicon.png",
               "src/favicon.icns",
               "src/favicon.256x256.png",
-              "src/favicon.512x512.png"
+              "src/favicon.512x512.png",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
+              "src/theme.less",
               "src/styles.scss"
             ],
             "scripts": []
@@ -69,21 +75,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-electron:build"
+            "browserTarget": "todowork:build"
           },
           "configurations": {
             "dev": {
-              "browserTarget": "angular-electron:build:dev"
+              "browserTarget": "todowork:build:dev"
             },
             "production": {
-              "browserTarget": "angular-electron:build:production"
+              "browserTarget": "todowork:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-electron:build"
+            "browserTarget": "todowork:build"
           }
         },
         "test": {
@@ -121,7 +127,7 @@
         }
       }
     },
-    "angular-electron-e2e": {
+    "todowork-e2e": {
       "root": "e2e",
       "projectType": "application",
       "architect": {
@@ -139,7 +145,7 @@
       }
     }
   },
-  "defaultProject": "angular-electron",
+  "defaultProject": "todowork",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
