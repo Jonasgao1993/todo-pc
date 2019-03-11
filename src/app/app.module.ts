@@ -6,8 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
-
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -27,7 +25,8 @@ import zh from '@angular/common/locales/zh';
 
 // In Application
 import { SharedModule } from './shared/shared.module';
-
+import { RoutesModule } from './routes/routes.module';
+import { LayoutModule } from './layout/layout.module';
 registerLocaleData(zh);
 
 // AoT requires an exported function for factories
@@ -45,8 +44,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
     SharedModule,
+    RoutesModule,
+    LayoutModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
