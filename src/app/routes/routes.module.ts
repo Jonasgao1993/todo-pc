@@ -7,7 +7,8 @@ import { RouterModule } from '@angular/router';
 import { routes } from './routes.config';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
-import { DashboardModule } from './dashboard/dashboard.module';
+// import { DashboardModule } from './dashboard/dashboard.module';
+// import { TestModule } from './test/test.module';
 // import { ConnectionResolver } from './route.resolver';
 
 @NgModule({
@@ -15,7 +16,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SharedModule,
     RouterModule.forRoot(routes, { useHash: true }),
     CoreModule,
-    DashboardModule
+    
   ],
   declarations: [
   ],
