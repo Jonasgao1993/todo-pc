@@ -11,7 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // NgZorro
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
@@ -49,7 +49,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    NgZorroAntdModule,
     BrowserAnimationsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN },
