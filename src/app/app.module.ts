@@ -13,7 +13,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ElectronService } from './providers/electron.service';
 
 import { WebviewDirective } from './directives/webview.directive';
-import { HomeComponent } from './components/home/home.component';
 
 // NgZorro
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
@@ -21,7 +20,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
-// In Application
 // In Application
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -39,7 +37,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     WebviewDirective
   ],
   imports: [
@@ -49,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule,
     RoutesModule,
     LayoutModule,
+    CoreModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
