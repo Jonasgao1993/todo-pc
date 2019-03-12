@@ -1,12 +1,11 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.less']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.less']
 })
-export class LayoutComponent {
-
+export class SidebarComponent {
   isCollapsed = true;
   triggerTemplate = null;
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
@@ -15,5 +14,4 @@ export class LayoutComponent {
   changeTrigger(): void {
     this.triggerTemplate = this.customTrigger;
   }
-
 }
