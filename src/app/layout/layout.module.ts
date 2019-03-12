@@ -4,11 +4,12 @@ import { LayoutComponent } from './layout.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { TitlebarComponent } from './titlebar/titlebar.component';
 
 @NgModule({
   imports: [
     CommonModule, RouterModule, SharedModule
   ],
-  declarations: [LayoutComponent, SidebarComponent]
+  declarations: [LayoutComponent, SidebarComponent, TitlebarComponent]
 })
 export class LayoutModule { }

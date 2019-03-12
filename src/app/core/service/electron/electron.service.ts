@@ -30,5 +30,34 @@ export class ElectronService {
   isElectron = () => {
     return window && window.process && window.process.type;
   }
+  // 判断当前窗口是佛是最大化
+  isMaximized() {
+    const win = this.remote.getCurrentWindow();
+    if (!win.isMaximized) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  // 最小化窗口
+  min() {
+    const win = this.remote.getCurrentWindow();
+    win.minimize();
+  }
+  // 最大化窗口
+  max() {
+    const win = this.remote.getCurrentWindow();
+    win.maximize();
+  }
+  // 还原最大化窗口
+  unmax() {
+    const win = this.remote.getCurrentWindow();
+    win.unmaximize();
+  }
+  // 关闭窗口
+  close() {
+    const win = this.remote.getCurrentWindow();
+    win.close();
+  }
 
 }
