@@ -18,9 +18,9 @@ export class TitlebarComponent implements OnInit {
   }
   max() {
     if (this.electronService.isMaximized()) {
-      this.electronService.max();
-    } else {
       this.electronService.unmax();
+    } else {
+      this.electronService.max();
     }
   }
   close() {
