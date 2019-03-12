@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedComponent } from './shared.component';
+import { WebviewDirective } from './directives/webview.directive';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [SharedComponent]
+  declarations: [WebviewDirective]
 })
 export class SharedModule { }

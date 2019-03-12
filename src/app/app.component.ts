@@ -1,10 +1,11 @@
 import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
-import { ElectronService } from './providers/electron.service';
+import { ElectronService } from './core/service/electron/electron.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { Router, NavigationEnd } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd';
 import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-root',

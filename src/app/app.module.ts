@@ -10,10 +10,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common
 // NG Translate
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { ElectronService } from './providers/electron.service';
-
-import { WebviewDirective } from './directives/webview.directive';
-
 // NgZorro
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,8 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    WebviewDirective
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -57,8 +52,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgZorroAntdModule,
     BrowserAnimationsModule
   ],
-  providers: [ElectronService, { provide: NZ_I18N, useValue: zh_CN },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },
+  { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

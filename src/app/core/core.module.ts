@@ -5,6 +5,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenService } from './service/token/token.service';
 import { HttpService } from './service/http/http.service';
+import { ElectronService } from './service/electron/electron.service';
 
 
 
@@ -16,7 +17,8 @@ import { HttpService } from './service/http/http.service';
     LocalStorageService,
     TokenService,
     CookieService,
-    HttpService
+    HttpService,
+    ElectronService
   ],
   declarations: [
   ],
