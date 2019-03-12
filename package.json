@@ -82,6 +82,8 @@
   },
   "dependencies": {
     "@angular/animations": "^7.2.8",
-    "ng-zorro-antd": "^7.0.1"
+    "ng-zorro-antd": "^7.0.1",
+    "angular-web-storage": "^4.1.0",
+    "ngx-cookie-service": "^2.1.0"
   }
 }

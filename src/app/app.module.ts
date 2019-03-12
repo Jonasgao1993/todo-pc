@@ -4,17 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common/http';
 
 // NG Translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ElectronService } from './providers/electron.service';
 
 import { WebviewDirective } from './directives/webview.directive';
-
-import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
 // NgZorro
@@ -24,9 +22,13 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
 // In Application
-import { SharedModule } from './shared/shared.module';
+// In Application
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { HttpService } from './core/service/http/http.service';
 import { RoutesModule } from './routes/routes.module';
 import { LayoutModule } from './layout/layout.module';
+import { SharedModule } from './shared/shared.module';
 registerLocaleData(zh);
 
 // AoT requires an exported function for factories
@@ -57,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgZorroAntdModule,
     BrowserAnimationsModule
   ],
-  providers: [ElectronService, { provide: NZ_I18N, useValue: zh_CN }],
+  providers: [ElectronService, { provide: NZ_I18N, useValue: zh_CN },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

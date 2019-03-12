@@ -1,11 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CoreComponent } from './core.component';
+
+
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { LocalStorageService } from 'angular-web-storage';
+import { CookieService } from 'ngx-cookie-service';
+import { TokenService } from './service/token/token.service';
+import { HttpService } from './service/http/http.service';
+
+
+
 
 @NgModule({
   imports: [
-    CommonModule
   ],
-  declarations: [CoreComponent]
+  providers: [
+    LocalStorageService,
+    TokenService,
+    CookieService,
+    HttpService
+  ],
+  declarations: [
+  ],
+  exports: [
+  ]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+  }
+}
