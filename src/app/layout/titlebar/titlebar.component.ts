@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ElectronService } from '../../core/service/electron/electron.service';
 
 @Component({
@@ -7,24 +7,22 @@ import { ElectronService } from '../../core/service/electron/electron.service';
   styleUrls: ['./titlebar.component.less']
 })
 export class TitlebarComponent implements OnInit {
-
+  isMaximized = false;
   constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
   }
-  min() {
-    console.log('dianjidianji ');
-    this.electronService.min();
-  }
   max() {
-    if (this.electronService.isMaximized()) {
-      this.electronService.unmax();
+    if (this.electronService.remote.getCurrentWindow().isMaximized()) {
+      this.electronService.adjustWin('UNMAX');
     } else {
-      this.electronService.max();
+      this.electronService.adjustWin('MAX');
     }
   }
-  close() {
-    this.electronService.close();
+  min() {
+    this.electronService.adjustWin('MIN');
   }
-
+  close() {
+    this.electronService.adjustWin('CLOSE');
+  }
 }
