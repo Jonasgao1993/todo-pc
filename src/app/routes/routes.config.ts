@@ -1,11 +1,10 @@
 import { LayoutComponent } from '../layout/layout.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TestComponent } from './test/test.component';
+import { LoginComponent } from './external/login/login.component';
 
 
 export const routes = [
     {
-        path: '',
+        path: 'app',
         component: LayoutComponent,
         // canActivate: [TokenService],
         // canActivateChild: [TokenService],
@@ -14,7 +13,7 @@ export const routes = [
             // 布局
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'test', loadChildren: './test/test.module#TestModule'},
+            { path: 'test', loadChildren: './test/test.module#TestModule' },
             //   { path: 'main-import', loadChildren: './main-import/main-import.module#MainImportModule' },
             //   { path: 'mapping', loadChildren: './mapping/mapping.module#AccountMappingModule' },
             //   { path: 'generate', loadChildren: './generate-file/generate-file.module#GenerateFileModule' },
@@ -24,8 +23,8 @@ export const routes = [
             //   { path: 'history', loadChildren: './history/history.module#HistoryModule'}
         ]
     },
-    //   { path: 'login', component: LoginComponent },
+    { path: 'login', component: LoginComponent },
     //   { path: 'registered', component: RegisterComponent },
-    // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

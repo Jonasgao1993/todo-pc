@@ -1,4 +1,4 @@
-<div id="title-bar" *ngIf="electronService.isElectron()">
+<div id="title-bar" *ngIf="electronService.isElectron()&& display">
    <ul id="title-bar-btns">
       <li id="min-btn" (click)="min()">
          <i nz-icon type="minus" theme="outline"></i>

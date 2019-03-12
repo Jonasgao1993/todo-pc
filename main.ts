@@ -19,13 +19,16 @@ function createWindow() {
     // height: size.height,
     width: 1200,
     height: 800,
-    minWidth: 1100,
-    minHeight: 750,
+    minWidth: 900,
+    minHeight: 650,
     resizable: true,
-    frame: false,
+    titleBarStyle: 'hiddenInset',
+    frame: isMac(),
     webPreferences: {
       nodeIntegration: true,
     },
+    backgroundColor: '#1e6cc7'
+    // show: false
   });
 
   if (serve) {
@@ -40,6 +43,9 @@ function createWindow() {
       slashes: true
     }));
   }
+  // win.once('ready-to-show', () => {
+  //   win.show();
+  // });
 
   if (serve) {
     win.webContents.openDevTools();
@@ -68,6 +74,8 @@ try {
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
       app.quit();
+    } else {
+      app.hide();
     }
   });
 
@@ -82,4 +90,12 @@ try {
 } catch (e) {
   // Catch Error
   // throw e;
+}
+// 判断是否是Mac系统
+function isMac() {
+  if (process.platform === 'darwin') {
+    return true;
+  } else {
+    return false;
+  }
 }
