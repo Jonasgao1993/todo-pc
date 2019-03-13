@@ -1,5 +1,6 @@
 import { LayoutComponent } from '../layout/layout.component';
 import { LoginComponent } from './external/login/login.component';
+import { SessionCheckComponent } from './external/session-check/session-check.component';
 
 
 export const routes = [
@@ -17,6 +18,7 @@ export const routes = [
         ]
     },
     { path: 'login', component: LoginComponent },
+    { path: 'session-check', component: SessionCheckComponent }
     //   { path: 'registered', component: RegisterComponent },
     // { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
