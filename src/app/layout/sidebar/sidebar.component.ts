@@ -1,4 +1,5 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,11 +8,5 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 })
 export class SidebarComponent {
   isCollapsed = true;
-  triggerTemplate = null;
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
-
-  /** custom trigger can be TemplateRef **/
-  changeTrigger(): void {
-    this.triggerTemplate = this.customTrigger;
-  }
 }
