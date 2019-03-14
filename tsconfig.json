@@ -22,7 +22,8 @@
   },
   "include": [
     "main.ts",
-    "src/**/*"
+    "src/**/*",
+    "windows/session-check/session-check.ts"
   ],
   "exclude": [
     "node_modules"

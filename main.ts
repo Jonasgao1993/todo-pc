@@ -1,68 +1,9 @@
-import { app, BrowserWindow, screen } from 'electron';
-import * as path from 'path';
-import * as url from 'url';
-
-let win, serve;
-const args = process.argv.slice(1);
-serve = args.some(val => val === '--serve');
-
+import { app, BrowserWindow } from 'electron';
+import createSessionCheckWindow from './windows/session-check/session-check';
 function createWindow() {
-
-  const electronScreen = screen;
-  const size = electronScreen.getPrimaryDisplay().workAreaSize;
-
-  // Create the browser window.
-  win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    // width: size.width,
-    // height: size.height,
-    width: 1200,
-    height: 800,
-    minWidth: 900,
-    minHeight: 650,
-    resizable: true,
-    titleBarStyle: 'hiddenInset',
-    frame: isMac(),
-    webPreferences: {
-      nodeIntegration: true,
-    },
-    backgroundColor: '#1e6cc7'
-    // show: false
-  });
-
-  if (serve) {
-    require('electron-reload')(__dirname, {
-      electron: require(`${__dirname}/node_modules/electron`)
-    });
-    win.loadURL('http://localhost:4200');
-  } else {
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
-      protocol: 'file:',
-      slashes: true
-    }));
-  }
-  // win.once('ready-to-show', () => {
-  //   win.show();
-  // });
-
-  if (serve) {
-    win.webContents.openDevTools();
-  }
-
-  // Emitted when the window is closed.
-  win.on('closed', () => {
-    // Dereference the window object, usually you would store window
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    win = null;
-  });
-
+  createSessionCheckWindow();
 }
-
 try {
-
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
@@ -82,7 +23,7 @@ try {
   app.on('activate', () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (win === null) {
+    if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
