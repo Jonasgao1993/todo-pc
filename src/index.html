@@ -5,10 +5,11 @@
   <meta charset="utf-8">
   <title>AngularElectron</title>
   <base href="">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.13&key=4ad763cb6827e4fa51426a03420df24d"></script> 
+  <!-- 引入高德地图的webapi -->
+  <script type="text/javascript"
+    src="https://webapi.amap.com/maps?v=1.4.13&key=4ad763cb6827e4fa51426a03420df24d"></script>
   <style>
     .bookshelf_wrapper {
       position: relative;
@@ -366,35 +367,36 @@
         transform: translateX(0px) rotateZ(-90deg);
       }
     }
+
     /*试验开始GPU加速*/
-    app-root{
+    app-root {
       display: block;
       width: 100% !important;
       height: 100vh !important;
       margin: 0;
     }
-    .background{
+
+    .background {
       background-color: #1e6cc7;
       height: 100vh !important;
     }
-
   </style>
 </head>
 
 <body>
   <app-root>
     <div class="background">
-        <div class="bookshelf_wrapper">
-            <ul class="books_list">
-              <li class="book_item first"></li>
-              <li class="book_item second"></li>
-              <li class="book_item third"></li>
-              <li class="book_item fourth"></li>
-              <li class="book_item fifth"></li>
-              <li class="book_item sixth"></li>
-            </ul>
-            <div class="shelf"></div>
-          </div>
+      <div class="bookshelf_wrapper">
+        <ul class="books_list">
+          <li class="book_item first"></li>
+          <li class="book_item second"></li>
+          <li class="book_item third"></li>
+          <li class="book_item fourth"></li>
+          <li class="book_item fifth"></li>
+          <li class="book_item sixth"></li>
+        </ul>
+        <div class="shelf"></div>
+      </div>
     </div>
   </app-root>
 </body>

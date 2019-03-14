@@ -83,6 +83,7 @@
   "dependencies": {
     "@angular/animations": "^7.2.8",
     "angular-web-storage": "^4.1.0",
+    "countup.js-angular2": "^7.0.0",
     "jquery": "^3.3.1",
     "ng-zorro-antd": "^7.0.2",
     "ngx-cookie-service": "^2.1.0"

@@ -8,11 +8,22 @@ declare let AMap: any;
   styleUrls: ['./weather.component.less']
 })
 export class WeatherComponent implements OnInit {
+  // 城市
   weatherCity = '获取中';
+  // 温度
   temperature = 0;
-  constructor(private _ngzone: NgZone) { }
+  constructor(private _ngzone: NgZone) {
+
+  }
 
   ngOnInit() {
+    this.getWeatherInfo();
+    // 没一个小时获取一次天气情况
+    setInterval(() => {
+      this.getWeatherInfo();
+    }, 3600000);
+  }
+  getWeatherInfo() {
     const that = this;
     AMap.plugin('AMap.CitySearch', function () {
       const citySearch = new AMap.CitySearch();
@@ -30,7 +41,7 @@ export class WeatherComponent implements OnInit {
                 console.log(data);
                 that._ngzone.run(() => {
                   that.temperature = Number(data.temperature);
-                })
+                });
               });
             });
           } else {
@@ -38,6 +49,7 @@ export class WeatherComponent implements OnInit {
           }
         });
       });
-    })
+    });
   }
 }
+

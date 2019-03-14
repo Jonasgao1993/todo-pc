@@ -6,10 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 // widgets
 import { WeatherComponent } from './widgets/weather/weather.component';
 import { FireworkComponent } from './widgets/firework/firework.component';
+import { CountUpModule } from 'countup.js-angular2';
 
 @NgModule({
   imports: [
-    CommonModule, NgZorroAntdModule, HttpClientModule
+    CommonModule, NgZorroAntdModule, HttpClientModule,CountUpModule
   ],
   declarations: [WebviewDirective, WeatherComponent, FireworkComponent],
   exports: [NgZorroAntdModule, WeatherComponent, FireworkComponent]
