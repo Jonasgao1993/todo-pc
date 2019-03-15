@@ -31,10 +31,14 @@
             ],
             "styles": [
               "src/theme.less",
-              "src/styles.less"
+              "src/styles.less",
+              "./node_modules/fullcalendar/dist/fullcalendar.min.css",
+              "./node_modules/fullcalendar-scheduler/dist/scheduler.min.css"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js"
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/fullcalendar/dist/fullcalendar.min.js",
+              "./node_modules/fullcalendar-scheduler/dist/scheduler.min.js"
             ]
           },
           "configurations": {
