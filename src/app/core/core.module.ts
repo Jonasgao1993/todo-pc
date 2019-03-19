@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { TokenService } from './service/token/token.service';
 import { HttpService } from './service/http/http.service';
 import { ElectronService } from './service/electron/electron.service';
+import { LocalDBService } from './service/localDB/localDB.service';
 
 
 
@@ -18,7 +19,8 @@ import { ElectronService } from './service/electron/electron.service';
     TokenService,
     CookieService,
     HttpService,
-    ElectronService
+    ElectronService,
+    LocalDBService
   ],
   declarations: [
   ],

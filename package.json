@@ -82,11 +82,13 @@
   },
   "dependencies": {
     "@angular/animations": "^7.2.8",
+    "@types/lowdb": "^1.0.7",
     "angular-web-storage": "^4.1.0",
     "countup.js-angular2": "^7.0.0",
     "fullcalendar": "^4.0.0-alpha.4",
     "fullcalendar-scheduler": "^4.0.0-alpha.4",
     "jquery": "^3.3.1",
+    "lowdb": "^1.0.0",
     "moment": "^2.24.0",
     "ng-zorro-antd": "^7.0.2",
     "ngx-cookie-service": "^2.1.0",
