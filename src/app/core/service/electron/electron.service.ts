@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { ipcRenderer, webFrame, remote } from 'electron';
+import { ipcRenderer, webFrame, remote, app } from 'electron';
 import * as childProcess from 'child_process';
 import * as fs from 'fs';
 
@@ -12,7 +12,7 @@ export class ElectronService {
   fs: typeof fs;
   // 当前窗口是否是最大化
   isMaximized = false;
-  constructor( private _ngzone: NgZone) {
+  constructor(private _ngzone: NgZone) {
     // Conditional imports
     if (this.isElectron()) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
@@ -68,5 +68,9 @@ export class ElectronService {
         this.isMaximized = this.remote.getCurrentWindow().isMaximized();
       });
     });
+  }
+  getPath() {
+    const APP = process.type === 'renderer' ? remote.app : app;
+    return APP.getPath('userData');
   }
 }

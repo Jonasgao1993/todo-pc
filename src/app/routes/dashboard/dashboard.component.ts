@@ -11,14 +11,17 @@ export class DashboardComponent implements OnInit {
   constructor(private localDBService: LocalDBService) { }
 
   ngOnInit() {
-    this.localDBService.getValue('name').then(
-      value => {
-        this.value = value;
-      },
-      error => {
-        this.value = '错误';
+
+  }
+  get() {
+    // const t = this.localDBService.get('setting');
+    // console.log(JSON.stringify(t));
+    this.localDBService.get('setting').then(
+      data => {
+        console.log(data);
+        this.value = data;
       }
-    );
+    )
   }
 
 }
