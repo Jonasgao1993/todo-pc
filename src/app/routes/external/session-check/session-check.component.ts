@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { ElectronService } from '../../../core/service/electron/electron.service';
+import * as EVENTS from '../../../shared/events/events';
 
 @Component({
   selector: 'app-session-check',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SessionCheckComponent implements OnInit {
   count = 4;
-  constructor(private router: Router) { }
+  constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
     this.countchange();
@@ -20,7 +20,7 @@ export class SessionCheckComponent implements OnInit {
         this.count--;
         this.countchange();
       } else {
-        this.router.navigate(['/login']);
+        this.electronService.sendDirectToMain(EVENTS.SHOW_LOGIN_AND_CLOSE_SESSION_CHECK);
       }
     }, 1000);
   }

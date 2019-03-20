@@ -70,7 +70,11 @@ export class ElectronService {
   }
   // 重设当前窗口的大小
   resize(width: number, height: number, animate?: boolean) {
-    const win = this.remote.getCurrentWindow();
-    win.setSize(width, height, animate);
+    // const win = this.remote.getCurrentWindow();
+    // win.setSize(width, height, animate);
+  }
+  // 给主进程发送指令
+  sendDirectToMain(event) {
+    ipcRenderer.send(event, '');
   }
 }

@@ -18,7 +18,7 @@
   },
   "include": [
     "main.ts",
-    "windows/session-check/session-check.ts",
+    "windows/**/*",
     "db.json"
   ],
   "exclude": [

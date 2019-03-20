@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronService } from '../../../core/service/electron/electron.service';
+import * as EVENTS from '../../../shared/events/events';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   go() {
-    this.router.navigate(['/dashboard']);
+    this.electronService.sendDirectToMain(EVENTS.SHOW_MAIN_AND_CLOSE_LOGIN);
   }
 
 }

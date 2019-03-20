@@ -1,14 +1,12 @@
-import { ipcMain, BrowserWindow, screen, shell } from 'electron';
+import { BrowserWindow, screen, shell } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
-import createMainWindow from '../main/main';
-import createLoginWindow from '../login/login';
 
 let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
-function createSessionCheckWindow(wins) {
+function createMainWindow(wins) {
 
   // const electronScreen = screen;
   // const size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -17,11 +15,11 @@ function createSessionCheckWindow(wins) {
   win = new BrowserWindow({
     // width: size.width,
     // height: size.height,
-    width: 300,
-    height: 300,
-    minWidth: 300,
-    minHeight: 300,
-    resizable: true,
+    width: 1000,
+    height: 700,
+    minWidth: 600,
+    minHeight: 400,
+    resizable: false,
     titleBarStyle: 'hiddenInset',
     frame: process.platform === 'darwin',
     webPreferences: {
@@ -35,35 +33,15 @@ function createSessionCheckWindow(wins) {
       // electron: require(`${__dirname}/node_modules/electron`)
       electron: require(path.join(__dirname, '../../node_modules/electron'))
     });
-    win.loadURL('http://localhost:4200/#/session-check');
+    win.loadURL('http://localhost:4200/#/');
   } else {
     win.loadURL(url.format({
       pathname: path.join(__dirname, '../../dist/index.html'),
       protocol: 'file:',
       slashes: true,
-      hash: '/session-check'
+      hash: '/'
     }));
   }
-  ipcMain.on(
-    'SHOW_MAIN_AND_CLOSE_SESSION_CHECK',
-    (event, credentials) => {
-      console.log('SHOW_MAIN_AND_CLOSE_SESSION_CHECK捕获到了');
-      if (!wins.session_check) { return; }
-      createMainWindow(wins);
-      wins.session_check.close();
-      // globalWin.login = null // not need
-    }
-  );
-  ipcMain.on(
-    'SHOW_LOGIN_AND_CLOSE_SESSION_CHECK',
-    (event, arg) => {
-        console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
-        if (!wins.session_check) { return; }
-        createLoginWindow(wins);
-        wins.session_check.close();
-        // globalWin.login = null // not need
-    }
-);
   win.once('ready-to-show', () => {
     win.show();
   });
@@ -74,7 +52,7 @@ function createSessionCheckWindow(wins) {
         win.focus();
       });
     });
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
   }
 
   // Emitted when the window is closed.
@@ -82,9 +60,9 @@ function createSessionCheckWindow(wins) {
     // Dereference the window object, usually you would store window
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    wins.session_check = null;
+    wins.main = null;
   });
-  wins.session_check = win;
+  wins.main = win;
   return win;
 }
-export default createSessionCheckWindow;
+export default createMainWindow;

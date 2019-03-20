@@ -23,7 +23,7 @@
   "include": [
     "main.ts",
     "src/**/*",
-    "windows/session-check/session-check.ts",
+    "windows/**/*",
     "db.json"
   ],
   "exclude": [
