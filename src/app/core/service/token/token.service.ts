@@ -44,6 +44,7 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
         this.removeCookie('OAUTH_TOKEN');
       }
       this.session = this.getToken();
+      console.log(JSON.stringify(this.session));
     } else {
       this.delToken('OAUTH_TOKEN');
     }

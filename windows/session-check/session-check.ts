@@ -29,7 +29,6 @@ function createSessionCheckWindow(wins) {
     },
     show: false
   });
-
   if (serve) {
     require('electron-reload')(__dirname, {
       // electron: require(`${__dirname}/node_modules/electron`)
@@ -44,6 +43,7 @@ function createSessionCheckWindow(wins) {
       hash: '/session-check'
     }));
   }
+
   ipcMain.on(
     'SHOW_MAIN_AND_CLOSE_SESSION_CHECK',
     (event, credentials) => {
@@ -57,14 +57,16 @@ function createSessionCheckWindow(wins) {
   ipcMain.on(
     'SHOW_LOGIN_AND_CLOSE_SESSION_CHECK',
     (event, arg) => {
-        console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
-        if (!wins.session_check) { return; }
-        createLoginWindow(wins);
-        wins.session_check.close();
-        // globalWin.login = null // not need
+      console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
+      if (!wins.session_check) { return; }
+      createLoginWindow(wins);
+      wins.session_check.close();
+      // globalWin.login = null // not need
     }
-);
+  );
   win.once('ready-to-show', () => {
+    const ses = win.webContents.session;
+    console.log(JSON.stringify(ses));
     win.show();
   });
 

@@ -20,7 +20,7 @@ function createLoginWindow(wins) {
     height: 400,
     minWidth: 600,
     minHeight: 400,
-    resizable: false,
+    resizable: true,
     titleBarStyle: 'hiddenInset',
     frame: process.platform === 'darwin',
     webPreferences: {
@@ -63,7 +63,7 @@ function createLoginWindow(wins) {
         win.focus();
       });
     });
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
   }
 
   // Emitted when the window is closed.

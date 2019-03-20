@@ -52,7 +52,7 @@ function createMainWindow(wins) {
         win.focus();
       });
     });
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
   }
 
   // Emitted when the window is closed.

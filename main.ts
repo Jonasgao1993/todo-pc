@@ -10,19 +10,6 @@ function createWindow() {
   createSessionCheckWindow(win);
 }
 try {
-  app.requestSingleInstanceLock();
-  app.on('second-instance', function (argv, cwd) {
-    if (win.session_check) {
-      win.session_check.focus();
-    }
-    if (win.login) {
-      win.login.focus();
-    }
-    if (win.main) {
-      if (win.main.isMinimized()) { win.main.restore(); }
-      win.main.focus();
-    }
-  });
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
