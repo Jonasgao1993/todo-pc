@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-session-check',
   templateUrl: './session-check.component.html',
@@ -19,8 +20,7 @@ export class SessionCheckComponent implements OnInit {
         this.count--;
         this.countchange();
       } else {
-        this.count = 4;
-        // this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       }
     }, 1000);
   }

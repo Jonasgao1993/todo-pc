@@ -32,11 +32,3 @@ try {
   // Catch Error
   // throw e;
 }
-// 判断是否是Mac系统
-function isMac() {
-  if (process.platform === 'darwin') {
-    return true;
-  } else {
-    return false;
-  }
-}
