@@ -61,8 +61,9 @@ function createSessionCheckWindow(wins) {
         // globalWin.login = null // not need
     });
     win.once('ready-to-show', function () {
-        var ses = win.webContents.session;
-        console.log(JSON.stringify(ses));
+        electron_1.session.defaultSession.cookies.get({}, function (error, cookies) {
+            console.log(error, cookies);
+        });
         win.show();
     });
     if (serve) {

@@ -1,4 +1,4 @@
-import { ipcMain, BrowserWindow, screen, shell } from 'electron';
+import { ipcMain, BrowserWindow, screen, shell ,session} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import createMainWindow from '../main/main';
@@ -28,6 +28,9 @@ function createSessionCheckWindow(wins) {
       nodeIntegration: true,
     },
     show: false
+  });
+  session.defaultSession.cookies.get({}, (error, cookies) => {
+    // console.log(error, cookies);
   });
   if (serve) {
     require('electron-reload')(__dirname, {
@@ -65,8 +68,7 @@ function createSessionCheckWindow(wins) {
     }
   );
   win.once('ready-to-show', () => {
-    const ses = win.webContents.session;
-    console.log(JSON.stringify(ses));
+  
     win.show();
   });
 

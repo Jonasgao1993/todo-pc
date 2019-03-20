@@ -39,7 +39,7 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
       expiresDate.setDate(expiresDate.getDate() + 1);
       if (oauthToken) {
         const options = {expires: expiresDate};
-        this.setCookie('OAUTH_TOKEN', oauthToken, options);
+        this.setCookie('OAUTH_TOKEN', oauthToken);
       } else {
         this.removeCookie('OAUTH_TOKEN');
       }
