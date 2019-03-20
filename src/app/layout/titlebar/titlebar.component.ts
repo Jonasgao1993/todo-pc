@@ -21,15 +21,16 @@ export class TitlebarComponent implements OnInit {
   }
   max() {
     if (this.electronService.remote.getCurrentWindow().isMaximized()) {
-      this.electronService.adjustWin('UNMAX');
+      this.electronService.unMaxWin();
     } else {
-      this.electronService.adjustWin('MAX');
+      this.electronService.maxWin();
     }
   }
   min() {
-    this.electronService.adjustWin('MIN');
+    this.electronService.minWin();
   }
   close() {
-    this.electronService.adjustWin('CLOSE');
+    this.electronService.closeWin();
   }
 }
+

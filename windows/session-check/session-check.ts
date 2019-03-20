@@ -13,14 +13,12 @@ function createSessionCheckWindow() {
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
     // width: size.width,
     // height: size.height,
-    width: 1100,
-    height: 768,
+    width: 300,
+    height: 300,
     minWidth: 300,
-    minHeight: 400,
+    minHeight: 300,
     resizable: true,
     titleBarStyle: 'hiddenInset',
     frame: process.platform === 'darwin',
@@ -35,13 +33,13 @@ function createSessionCheckWindow() {
       // electron: require(`${__dirname}/node_modules/electron`)
       electron: require(path.join(__dirname, '../../node_modules/electron'))
     });
-    win.loadURL('http://localhost:4200/');
+    win.loadURL('http://localhost:4200/#/session-check');
   } else {
     win.loadURL(url.format({
       pathname: path.join(__dirname, '../../dist/index.html'),
       protocol: 'file:',
       slashes: true,
-      hash: '/'
+      hash: '/session-check'
     }));
   }
   win.once('ready-to-show', () => {
@@ -49,7 +47,7 @@ function createSessionCheckWindow() {
   });
 
   if (serve) {
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
   }
 
   // Emitted when the window is closed.

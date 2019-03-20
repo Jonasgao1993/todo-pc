@@ -1,22 +1,12 @@
-[![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/) [![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)
-
-[![Travis Build Status][build-badge]][build]
-[![Dependencies Status][dependencyci-badge]][dependencyci]
-[![Make a pull request][prs-badge]][prs]
-[![License](http://img.shields.io/badge/Licence-MIT-brightgreen.svg)](LICENSE.md)
-
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
-[![Tweet][twitter-badge]][twitter]
-
 # Introduction
 
-Bootstrap and package your project with Angular 7 and Electron (Typescript + SASS + Hot Reload) for creating Desktop applications.
+ Angular 7 、Electron (Typescript + Less + Hot Reload) 、NG_ZOORO（Ant Design UI Framework）、SQLite for creating Desktop applications.
 
 Currently runs with:
 
 - Angular v7.2.0
 - Electron v4.0.0
+- SQLite 3
 - Electron Builder v20.28.1
 
 With this sample, you can :
@@ -71,35 +61,15 @@ You can disable "Developer Tools" by commenting `win.webContents.openDevTools();
 |`npm run electron:windows`| On a Windows OS, builds your application and creates an app consumable in windows 32/64 bit systems |
 |`npm run electron:mac`|  On a MAC OS, builds your application and generates a `.app` file of your application that can be run on Mac |
 
-**Your application is optimised. Only /dist folder and node dependencies are included in the executable.**
+需要SQLite 3 Windows需要安装VS2017
 
-## You want to use a specific lib (like rxjs) in electron main thread ?
+Windows配置SQLite 3 配置方法
+1、安装Python 2.7环境，请选择把python加入系统变量path（安装界面勾选）；
+2、安装VS 2017，因为运行需要C/C++环境
+3、npm install -g node-gyp
+4、npm install -g node-pre-gyp
+5、npm install --global --production windows-build-tools
+6、npm install sqlite3 --save
+7、cd到node_module/sqlite3
+8、node-gyp rebuild --target=4.0.0 --arch=x64 --target_platform=win32 --dist-url=https://atom.io/download/electron/ --module_name=node_sqlite3 --module_path=../lib/binding/electron-v4.0-win32-x64
 
-You can do this! Just by importing your library in npm dependencies (not devDependencies) with `npm install --save`. It will be loaded by electron during build phase and added to the final package. Then use your library by importing it in `main.ts` file. Easy no ?
-
-## Browser mode
-
-Maybe you want to execute the application in the browser with hot reload ? You can do it with `npm run ng:serve:web`.
-Note that you can't use Electron or NodeJS native libraries in this case. Please check `providers/electron.service.ts` to watch how conditional import of electron/Native libraries is done.
-
-## Branch & Packages version
-
-- Angular 4 & Electron 1 : Branch [angular4](https://github.com/maximegris/angular-electron/tree/angular4)
-- Angular 5 & Electron 1 : Branch [angular5](https://github.com/maximegris/angular-electron/tree/angular5)
-- Angular 6 & Electron 3 : Branch [angular6](https://github.com/maximegris/angular-electron/tree/angular6)
-- Angular 7 & Electron 3 : (master)
-
-[build-badge]: https://travis-ci.org/maximegris/angular-electron.svg?branch=master
-[build]: https://travis-ci.org/maximegris/angular-electron
-[dependencyci-badge]: https://dependencyci.com/github/maximegris/angular-electron/badge
-[dependencyci]: https://dependencyci.com/github/maximegris/angular-electron
-[license-badge]: https://img.shields.io/badge/license-Apache2-blue.svg?style=flat
-[license]: https://github.com/maximegris/angular-electron/blob/master/LICENSE.md
-[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[prs]: http://makeapullrequest.com
-[github-watch-badge]: https://img.shields.io/github/watchers/maximegris/angular-electron.svg?style=social
-[github-watch]: https://github.com/maximegris/angular-electron/watchers
-[github-star-badge]: https://img.shields.io/github/stars/maximegris/angular-electron.svg?style=social
-[github-star]: https://github.com/maximegris/angular-electron/stargazers
-[twitter]: https://twitter.com/intent/tweet?text=Check%20out%20angular-electron!%20https://github.com/maximegris/angular-electron%20%F0%9F%91%8D
-[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/maximegris/angular-electron.svg?style=social

@@ -13,7 +13,7 @@ export class ElectronService {
   // 当前窗口是否是最大化
   isMaximized = false;
   constructor(private _ngzone: NgZone) {
-    // Conditional imports
+    // 如果是Electron模式下，才导入
     if (this.isElectron()) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
       this.webFrame = window.require('electron').webFrame;
@@ -27,31 +27,25 @@ export class ElectronService {
   isElectron = () => {
     return window && window.process && window.process.type;
   }
-  // 窗口的最大化、最小化和关闭调整
-  adjustWin(type) {
-    if (this.isElectron()) {
-      const win = this.remote.getCurrentWindow();
-      switch (type) {
-        // 最大化
-        case 'MAX':
-          win.maximize();
-          break;
-        // 最小化
-        case 'MIN':
-          win.minimize();
-          break;
-        // 最大化还原
-        case 'UNMAX':
-          win.unmaximize();
-          break;
-        // 窗口关闭
-        case 'CLOSE':
-          win.close();
-          break;
-        default:
-          break;
-      }
-    }
+  // 关闭窗口
+  closeWin() {
+    const win = this.remote.getCurrentWindow();
+    win.close();
+  }
+  // 最大化窗口
+  maxWin() {
+    const win = this.remote.getCurrentWindow();
+    win.maximize();
+  }
+  // 取消最大化窗口
+  unMaxWin() {
+    const win = this.remote.getCurrentWindow();
+    win.unmaximize();
+  }
+  // 最小化窗口
+  minWin() {
+    const win = this.remote.getCurrentWindow();
+    win.minimize();
   }
   listenWin() {
     const win = this.remote.getCurrentWindow();
@@ -69,6 +63,7 @@ export class ElectronService {
       });
     });
   }
+  // 或得当前系统userData路径
   getPath() {
     const APP = process.type === 'renderer' ? remote.app : app;
     return APP.getPath('userData');

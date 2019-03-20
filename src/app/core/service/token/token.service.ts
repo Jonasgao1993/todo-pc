@@ -50,13 +50,6 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
 
   }
 
-  getCurrentCompany() {
-    if (this.getToken() && this.getToken().user) {
-      return this.getToken().user.currentCompany;
-    }
-    return null;
-  }
-
   /**
    * 获取token
    */
