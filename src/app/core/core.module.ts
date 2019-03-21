@@ -1,5 +1,3 @@
-
-
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { CookieService } from 'ngx-cookie-service';
@@ -7,10 +5,7 @@ import { TokenService } from './service/token/token.service';
 import { HttpService } from './service/http/http.service';
 import { ElectronService } from './service/electron/electron.service';
 import { LocalDBService } from './service/localDB/localDB.service';
-
-
-
-
+import { CyptoService } from './service/crypto/cypto.service';
 
 @NgModule({
   imports: [
@@ -21,7 +16,8 @@ import { LocalDBService } from './service/localDB/localDB.service';
     CookieService,
     HttpService,
     ElectronService,
-    LocalDBService
+    LocalDBService,
+    CyptoService
   ],
   declarations: [
   ],

@@ -27,7 +27,7 @@ export class LocalDBService {
         TOKEN: {
           OAUTH_TOKEN: '',
           EXPIRETIME: 0
-        },
+        }
       })
         .write();
     }

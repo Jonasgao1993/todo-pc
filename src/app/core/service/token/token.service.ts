@@ -1,9 +1,10 @@
-import {Injectable, NgZone, Injector} from '@angular/core';
-import {Router} from '@angular/router';
-import {CanActivate, CanActivateChild, CanDeactivate} from '@angular/router';
-import {CookieService} from 'ngx-cookie-service';
-import {Observable} from 'rxjs';
-import {LocalStorageService} from 'angular-web-storage';
+import { Injectable, NgZone, Injector } from '@angular/core';
+import { Router } from '@angular/router';
+import { CanActivate, CanActivateChild, CanDeactivate } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { LocalStorageService } from 'angular-web-storage';
+import { LocalDBService } from '../localDB/localDB.service';
 
 
 export interface CanComponentDeactivate {
@@ -17,17 +18,15 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
   session: any;
   accountBook: any;
 
-  constructor(private cookieService: CookieService, private injector: Injector, private localStorageSrv: LocalStorageService) {
+  constructor(private injector: Injector, private localDBService: LocalDBService) {
   }
 
   /**
    * 清除token
    */
   public logout() {
-    this.setToken(null);
-    this.session = null;
-    // this.localStorageSrv.set(StorageEnum.Account.toString(), null);
-    // window.location.href = '/login';
+    this.setToken('');
+    this.session = '';
   }
 
   /**
@@ -38,44 +37,49 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
       const expiresDate = new Date();
       expiresDate.setDate(expiresDate.getDate() + 1);
       if (oauthToken) {
-        const options = {expires: expiresDate};
-        this.setCookie('OAUTH_TOKEN', oauthToken);
+        const options = { expires: expiresDate };
+        this.setCookie('TOKEN', oauthToken);
       } else {
-        this.removeCookie('OAUTH_TOKEN');
+        this.setCookie('TOKEN', '');
       }
       this.session = this.getToken();
       console.log(JSON.stringify(this.session));
-    } else {
-      this.delToken('OAUTH_TOKEN');
     }
-
   }
 
   /**
    * 获取token
    */
-  public getToken(key?: string) {
+  public getToken(key?: string): Promise<any> {
     if (!key) {
-      key = 'OAUTH_TOKEN';
+      key = 'TOKEN';
     }
-    const token = this.getCookie(key);
-    return token;
+    return new Promise<any>(resolve => {
+      this.getCookie(key).then(
+        data => {
+          if (data) {
+            resolve(data);
+          }
+        }
+      );
+    });
   }
-
   /**
    * 设置Cookie
    */
-  private setCookie(key: string, value: Object, options?: any) {
+  private setCookie(key: string, value: Object) {
     const cookieValue = JSON.stringify(value);
-    options ? this.cookieService.set(key, cookieValue, options) :
-      this.cookieService.set(key, cookieValue);
+    this.localDBService.update(key, cookieValue).then(
+      data => {
+      }
+    )
   }
 
   /**
    * 移除Cookie
    */
   private removeCookie(key: string) {
-    this.cookieService.delete(key);
+    // s this.cookieService.delete(key);
   }
 
   /**
@@ -83,7 +87,7 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
    */
   delToken(key?: string): void {
     if (!key) {
-      key = 'OAUTH_TOKEN';
+      key = 'TOKEN';
     }
     this.removeCookie(key);
   }
@@ -91,14 +95,18 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
   /**
    * 获取Cookie
    */
-  private getCookie(key: string) {
-    const cookieData = this.cookieService.get(key);
-    /*jshint eqnull:true */
-    if (cookieData) {
-      return JSON.parse(cookieData);
-    } else {
-      return null;
-    }
+  private getCookie(key: string): Promise<any> {
+    return new Promise<any>(resolve => {
+      this.localDBService.get(key).then(
+        data => {
+          if (data) {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        }
+      )
+    });
   }
 
   /**
