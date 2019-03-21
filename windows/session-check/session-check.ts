@@ -29,9 +29,6 @@ function createSessionCheckWindow(wins) {
     },
     show: false
   });
-  session.defaultSession.cookies.get({}, (error, cookies) => {
-    // console.log(error, cookies);
-  });
   if (serve) {
     require('electron-reload')(__dirname, {
       // electron: require(`${__dirname}/node_modules/electron`)
@@ -68,7 +65,6 @@ function createSessionCheckWindow(wins) {
     }
   );
   win.once('ready-to-show', () => {
-  
     win.show();
   });
 
@@ -78,7 +74,7 @@ function createSessionCheckWindow(wins) {
         win.focus();
       });
     });
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
   }
 
   // Emitted when the window is closed.

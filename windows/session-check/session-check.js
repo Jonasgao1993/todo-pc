@@ -27,9 +27,6 @@ function createSessionCheckWindow(wins) {
         },
         show: false
     });
-    electron_1.session.defaultSession.cookies.get({}, function (error, cookies) {
-        // console.log(error, cookies);
-    });
     if (serve) {
         require('electron-reload')(__dirname, {
             // electron: require(`${__dirname}/node_modules/electron`)
@@ -72,7 +69,7 @@ function createSessionCheckWindow(wins) {
                 win.focus();
             });
         });
-        win.webContents.openDevTools();
+        // win.webContents.openDevTools();
     }
     // Emitted when the window is closed.
     win.on('closed', function () {
