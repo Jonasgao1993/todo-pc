@@ -9,7 +9,7 @@ import * as EVENTS from '../../../shared/events/events';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-  session:any;
+  session: any;
   constructor(private router: Router, private electronService: ElectronService,
     private tokenService: TokenService) {
     this.electronService.resize(900, 700, true);
