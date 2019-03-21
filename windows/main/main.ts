@@ -19,7 +19,7 @@ function createMainWindow(wins) {
     height: 700,
     minWidth: 600,
     minHeight: 400,
-    resizable: false,
+    resizable: true,
     titleBarStyle: 'hiddenInset',
     frame: process.platform === 'darwin',
     webPreferences: {

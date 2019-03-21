@@ -18,12 +18,17 @@ export class LocalDBService {
   async initDatabase() {
     this.STORE_PATH = this.electronService.getPath();
     if (!fs.pathExistsSync(this.STORE_PATH)) {
-      fs.mkdirpSync(this.STORE_PATH);
+      fs.mkdirpSync(path.join(this.STORE_PATH));
     }
-    const adapter = new FileAsync(path.join(this.STORE_PATH, '/db.json'));
+    const adapter = new FileAsync(path.join(this.STORE_PATH, '/session.json'));
     this.db = await lowdb(adapter);
-    if (!this.db.has('setting').value()) { // 先判断该值存不存在
-      this.db.defaults({ setting: '123333', user: {}, count: 0 })
+    if (!this.db.has('TOKEN').value()) { // 先判断该值存不存在
+      this.db.defaults({
+        TOKEN: {
+          OAUTH_TOKEN: '',
+          EXPIRETIME: 0
+        },
+      })
         .write();
     }
   }

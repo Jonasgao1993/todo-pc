@@ -8,7 +8,7 @@ import { TokenService } from '../../core/service/token/token.service';
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-  value = '1';
+  value = {};
   session = 'huuh';
   constructor(private localDBService: LocalDBService, private tokenService: TokenService) { }
 
@@ -19,10 +19,10 @@ export class DashboardComponent implements OnInit {
   get() {
     // const t = this.localDBService.get('setting');
     // console.log(JSON.stringify(t));
-    this.localDBService.get('setting').then(
+    this.localDBService.get('TOKEN').then(
       data => {
         console.log(data);
-        this.value = data;
+        this.value = JSON.stringify(data);
       }
     )
   }

@@ -20,9 +20,8 @@ export class LoginComponent implements OnInit {
 
   }
   go() {
-    // this.electronService.sendDirectToMain(EVENTS.SHOW_MAIN_AND_CLOSE_LOGIN);
-    this.tokenService.setToken('123456789');
-    this.session = this.tokenService.getToken();
-
+    this.electronService.sendDirectToMain(EVENTS.SHOW_MAIN_AND_CLOSE_LOGIN);
+    // this.tokenService.setToken('123456789');
+    // this.session = this.tokenService.getToken();
   }
 }

@@ -8,3 +8,5 @@ export const SHOW_MAIN_AND_CLOSE_SESSION_CHECK = 'SHOW_MAIN_AND_CLOSE_SESSION_CH
 export const CLOSE_LOGIN = 'CLOSE_LOGIN';
 // 关闭登录窗口，显示主窗口
 export const SHOW_MAIN_AND_CLOSE_LOGIN = 'SHOW_MAIN_AND_CLOSE_LOGIN';
+// 打开调试窗口
+export const SHOW_DEV = 'SHOW_DEV';
