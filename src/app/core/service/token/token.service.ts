@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from 'angular-web-storage';
 import { LocalDBService } from '../localDB/localDB.service';
+import { CyptoService } from '../crypto/cypto.service';
 
 
 export interface CanComponentDeactivate {
@@ -18,9 +19,9 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
   session: any;
   accountBook: any;
 
-  constructor(private injector: Injector, private localDBService: LocalDBService) {
+  constructor(private injector: Injector, private localDBService: LocalDBService,
+    private cyptoService:CyptoService) {
   }
-
   /**
    * 清除token
    */
@@ -28,25 +29,20 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
     this.setToken('');
     this.session = '';
   }
-
   /**
    * 设置token
    */
   public setToken(oauthToken: any) {
     if (oauthToken) {
-      const expiresDate = new Date();
-      expiresDate.setDate(expiresDate.getDate() + 1);
+      // const expiresDate = new Date();
+      // expiresDate.setDate(expiresDate.getDate() + 1);
       if (oauthToken) {
-        const options = { expires: expiresDate };
         this.setCookie('TOKEN', oauthToken);
       } else {
         this.setCookie('TOKEN', '');
       }
-      this.session = this.getToken();
-      console.log(JSON.stringify(this.session));
     }
   }
-
   /**
    * 获取token
    */
@@ -58,7 +54,9 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
       this.getCookie(key).then(
         data => {
           if (data) {
-            resolve(data);
+            this.session = this.cyptoService.decryptedDES(data);
+            console.log(JSON.stringify(this.session));
+            resolve(this.session);
           }
         }
       );
@@ -68,30 +66,12 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
    * 设置Cookie
    */
   private setCookie(key: string, value: Object) {
-    const cookieValue = JSON.stringify(value);
+    const cookieValue = this.cyptoService.encryptedDES(JSON.stringify(value));
     this.localDBService.update(key, cookieValue).then(
       data => {
       }
     )
   }
-
-  /**
-   * 移除Cookie
-   */
-  private removeCookie(key: string) {
-    // s this.cookieService.delete(key);
-  }
-
-  /**
-   * 删除Token
-   */
-  delToken(key?: string): void {
-    if (!key) {
-      key = 'TOKEN';
-    }
-    this.removeCookie(key);
-  }
-
   /**
    * 获取Cookie
    */
@@ -105,41 +85,27 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
             resolve(data);
           }
         }
-      )
+      );
     });
   }
-
   /**
    * 路由守卫 如果没有TOKEN 直接去Login
    *
    */
   canActivate() {
     this.session = this.getToken();
-    if (this.session && this.session.user && this.session.access_token) {
+    if (this.session) {
     } else {
       this.injector.get(Router).navigate(['/login']);
       return false;
     }
     return true;
   }
-
   canActivateChild() {
     return this.canActivate();
   }
-
   canDeactivate(component: CanComponentDeactivate): Observable<boolean> | boolean {
     return component.canDeactivate ? component.canDeactivate() : true;
   }
-
-  /**
-   * 超时退出
-   */
-  public idleOut() {
-    const tempSession = this.session;
-    tempSession.access_token = undefined;
-    this.setToken(tempSession);
-    this.session = this.getToken();
-  }
-
 }
 

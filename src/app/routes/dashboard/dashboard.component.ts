@@ -13,12 +13,8 @@ export class DashboardComponent implements OnInit {
   constructor(private localDBService: LocalDBService, private tokenService: TokenService) { }
 
   ngOnInit() {
-    this.session = JSON.stringify(this.tokenService.session);
-    console.log('1');
   }
   get() {
-    // const t = this.localDBService.get('setting');
-    // console.log(JSON.stringify(t));
     this.tokenService.getToken().then(
       data => {
         if (data) {
@@ -27,5 +23,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
+  set() {
+    this.tokenService.setToken({ 'OAUTH_TOKEN': '1esrdtfyguhij', 'EXPIREDTIME': 7200 });
+  }
 }

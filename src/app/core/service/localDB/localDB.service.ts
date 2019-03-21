@@ -24,10 +24,7 @@ export class LocalDBService {
     this.db = await lowdb(adapter);
     if (!this.db.has('TOKEN').value()) { // 先判断该值存不存在
       this.db.defaults({
-        TOKEN: {
-          OAUTH_TOKEN: '',
-          EXPIRETIME: 0
-        }
+        TOKEN: ''
       })
         .write();
     }
