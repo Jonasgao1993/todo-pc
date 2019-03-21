@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../../../core/service/electron/electron.service';
 import * as EVENTS from '../../../shared/events/events';
+import { TokenService } from '../../../core/service/token/token.service';
 
 @Component({
   selector: 'app-session-check',
@@ -9,7 +10,7 @@ import * as EVENTS from '../../../shared/events/events';
 })
 export class SessionCheckComponent implements OnInit {
   count = 4;
-  constructor(private electronService: ElectronService) { }
+  constructor(private electronService: ElectronService, private tokenService: TokenService) { }
 
   ngOnInit() {
     this.countchange();
@@ -20,8 +21,21 @@ export class SessionCheckComponent implements OnInit {
         this.count--;
         this.countchange();
       } else {
-        this.electronService.sendDirectToMain(EVENTS.SHOW_LOGIN_AND_CLOSE_SESSION_CHECK);
+        this.sessionCheck();
+        // this.electronService.sendDirectToMain(EVENTS.SHOW_LOGIN_AND_CLOSE_SESSION_CHECK);
       }
     }, 1000);
+  }
+  sessionCheck() {
+    console.log('准备执行了');
+    this.tokenService.getToken().then(
+      data => {
+        if (data) {
+          this.electronService.sendDirectToMain(EVENTS.SHOW_MAIN_AND_CLOSE_SESSION_CHECK);
+        } else {
+          this.electronService.sendDirectToMain(EVENTS.SHOW_LOGIN_AND_CLOSE_SESSION_CHECK);
+        }
+      }
+    );
   }
 }

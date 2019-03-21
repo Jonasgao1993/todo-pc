@@ -1,9 +1,5 @@
 import { Injectable, NgZone, Injector } from '@angular/core';
-import { Router } from '@angular/router';
-import { CanActivate, CanActivateChild, CanDeactivate } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from 'angular-web-storage';
 import { LocalDBService } from '../localDB/localDB.service';
 import { CyptoService } from '../crypto/cypto.service';
 
@@ -15,12 +11,12 @@ export interface CanComponentDeactivate {
 @Injectable({
   providedIn: 'root'
 })
-export class TokenService implements CanActivate, CanActivateChild, CanDeactivate<CanComponentDeactivate> {
+export class TokenService {
   session: any;
   accountBook: any;
 
   constructor(private injector: Injector, private localDBService: LocalDBService,
-    private cyptoService:CyptoService) {
+    private cyptoService: CyptoService) {
   }
   /**
    * 清除token
@@ -50,14 +46,16 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
     if (!key) {
       key = 'TOKEN';
     }
+    console.log('2345678');
     return new Promise<any>(resolve => {
       this.getCookie(key).then(
         data => {
-          if (data) {
-            this.session = this.cyptoService.decryptedDES(data);
-            console.log(JSON.stringify(this.session));
-            resolve(this.session);
+          this.session = '';
+          if (data && data !== '') {
+            this.session = JSON.parse(this.cyptoService.decryptedDES(data));
           }
+          console.log(this.session);
+          resolve(this.session);
         }
       );
     });
@@ -79,33 +77,28 @@ export class TokenService implements CanActivate, CanActivateChild, CanDeactivat
     return new Promise<any>(resolve => {
       this.localDBService.get(key).then(
         data => {
-          if (data) {
-            resolve(data);
-          } else {
-            resolve(data);
-          }
+          resolve(data);
         }
       );
     });
   }
-  /**
-   * 路由守卫 如果没有TOKEN 直接去Login
-   *
-   */
-  canActivate() {
-    this.session = this.getToken();
-    if (this.session) {
-    } else {
-      this.injector.get(Router).navigate(['/login']);
-      return false;
-    }
-    return true;
-  }
-  canActivateChild() {
-    return this.canActivate();
-  }
-  canDeactivate(component: CanComponentDeactivate): Observable<boolean> | boolean {
-    return component.canDeactivate ? component.canDeactivate() : true;
-  }
+  // /**
+  //  * 路由守卫 如果没有TOKEN 直接去Login
+  //  *
+  //  */
+  // canActivate() {
+  //   if (this.session) {
+  //   } else {
+  //     this.injector.get(Router).navigate(['/login']);
+  //     return false;
+  //   }
+  //   return true;
+  // }
+  // canActivateChild() {
+  //   return this.canActivate();
+  // }
+  // canDeactivate(component: CanComponentDeactivate): Observable<boolean> | boolean {
+  //   return component.canDeactivate ? component.canDeactivate() : true;
+  // }
 }
 

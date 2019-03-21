@@ -1,4 +1,4 @@
-import { ipcMain, BrowserWindow, screen, shell } from 'electron';
+import { ipcMain, BrowserWindow} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import createMainWindow from '../main/main';

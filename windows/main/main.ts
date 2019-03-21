@@ -1,4 +1,4 @@
-import { BrowserWindow, screen, shell } from 'electron';
+import { BrowserWindow} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 

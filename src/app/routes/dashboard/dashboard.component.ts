@@ -10,6 +10,11 @@ import { TokenService } from '../../core/service/token/token.service';
 export class DashboardComponent implements OnInit {
   value: any;
   session: any;
+  token = {
+    OAUTH_TOKEN: '939484gff',
+    TIMESTAMP: 44444,
+    EXPIREDTIME: 7200
+  }
   constructor(private localDBService: LocalDBService, private tokenService: TokenService) { }
 
   ngOnInit() {
@@ -18,12 +23,12 @@ export class DashboardComponent implements OnInit {
     this.tokenService.getToken().then(
       data => {
         if (data) {
-          this.session = JSON.stringify(data);
+          this.session = data;
         }
       }
     );
   }
   set() {
-    this.tokenService.setToken({ 'OAUTH_TOKEN': '1esrdtfyguhij', 'EXPIREDTIME': 7200 });
+    this.tokenService.setToken(this.token);
   }
 }
