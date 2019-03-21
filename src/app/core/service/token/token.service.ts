@@ -46,7 +46,6 @@ export class TokenService {
     if (!key) {
       key = 'TOKEN';
     }
-    console.log('2345678');
     return new Promise<any>(resolve => {
       this.getCookie(key).then(
         data => {

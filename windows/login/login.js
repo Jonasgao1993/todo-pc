@@ -53,11 +53,6 @@ function createLoginWindow(wins) {
         win.show();
     });
     if (serve) {
-        win.webContents.on('devtools-opened', function () {
-            setImmediate(function () {
-                win.focus();
-            });
-        });
         win.webContents.openDevTools();
     }
     // Emitted when the window is closed.

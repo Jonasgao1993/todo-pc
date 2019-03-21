@@ -46,7 +46,7 @@ function createSessionCheckWindow(wins) {
 
   ipcMain.on(
     'SHOW_MAIN_AND_CLOSE_SESSION_CHECK',
-    (event, credentials) => {
+    () => {
       console.log('SHOW_MAIN_AND_CLOSE_SESSION_CHECK捕获到了');
       if (!wins.session_check) { return; }
       createMainWindow(wins);
@@ -56,7 +56,7 @@ function createSessionCheckWindow(wins) {
   );
   ipcMain.on(
     'SHOW_LOGIN_AND_CLOSE_SESSION_CHECK',
-    (event, arg) => {
+    () => {
       console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
       if (!wins.session_check) { return; }
       createLoginWindow(wins);
@@ -69,12 +69,7 @@ function createSessionCheckWindow(wins) {
   });
 
   if (serve) {
-    win.webContents.on('devtools-opened', () => {
-      setImmediate(() => {
-        win.focus();
-      });
-    });
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
   }
 
   // Emitted when the window is closed.

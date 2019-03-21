@@ -42,7 +42,7 @@ function createSessionCheckWindow(wins) {
             hash: '/session-check'
         }));
     }
-    electron_1.ipcMain.on('SHOW_MAIN_AND_CLOSE_SESSION_CHECK', function (event, credentials) {
+    electron_1.ipcMain.on('SHOW_MAIN_AND_CLOSE_SESSION_CHECK', function () {
         console.log('SHOW_MAIN_AND_CLOSE_SESSION_CHECK捕获到了');
         if (!wins.session_check) {
             return;
@@ -51,7 +51,7 @@ function createSessionCheckWindow(wins) {
         wins.session_check.close();
         // globalWin.login = null // not need
     });
-    electron_1.ipcMain.on('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK', function (event, arg) {
+    electron_1.ipcMain.on('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK', function () {
         console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
         if (!wins.session_check) {
             return;
@@ -64,12 +64,7 @@ function createSessionCheckWindow(wins) {
         win.show();
     });
     if (serve) {
-        win.webContents.on('devtools-opened', function () {
-            setImmediate(function () {
-                win.focus();
-            });
-        });
-        // win.webContents.openDevTools();
+        win.webContents.openDevTools();
     }
     // Emitted when the window is closed.
     win.on('closed', function () {

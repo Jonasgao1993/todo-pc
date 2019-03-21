@@ -31,4 +31,11 @@ export class DashboardComponent implements OnInit {
   set() {
     this.tokenService.setToken(this.token);
   }
+  inform() {
+    const notification = {
+      title: '基本通知',
+      body: '短消息部分'
+    };
+    const myNotification = new Notification(notification.title, { body: notification.body });
+  }
 }
