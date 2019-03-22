@@ -1,4 +1,4 @@
-import { ipcMain, BrowserWindow, screen, shell ,session} from 'electron';
+import { ipcMain, BrowserWindow, app } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import createMainWindow from '../main/main';
@@ -8,7 +8,7 @@ let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
-function createSessionCheckWindow(wins) {
+function createSessionCheckWindow() {
 
   // const electronScreen = screen;
   // const size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -21,9 +21,8 @@ function createSessionCheckWindow(wins) {
     height: 300,
     minWidth: 300,
     minHeight: 300,
-    resizable: true,
-    titleBarStyle: 'hiddenInset',
-    frame: process.platform === 'darwin',
+    resizable: false,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -48,9 +47,9 @@ function createSessionCheckWindow(wins) {
     'SHOW_MAIN_AND_CLOSE_SESSION_CHECK',
     () => {
       console.log('SHOW_MAIN_AND_CLOSE_SESSION_CHECK捕获到了');
-      if (!wins.session_check) { return; }
-      createMainWindow(wins);
-      wins.session_check.close();
+      if (!win) { return; }
+      createMainWindow();
+      win.destroy();
       // globalWin.login = null // not need
     }
   );
@@ -58,9 +57,9 @@ function createSessionCheckWindow(wins) {
     'SHOW_LOGIN_AND_CLOSE_SESSION_CHECK',
     () => {
       console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
-      if (!wins.session_check) { return; }
-      createLoginWindow(wins);
-      wins.session_check.close();
+      if (!win) { return; }
+      createLoginWindow();
+      win.destroy();
       // globalWin.login = null // not need
     }
   );
@@ -68,18 +67,9 @@ function createSessionCheckWindow(wins) {
     win.show();
   });
 
-  if (serve) {
-    win.webContents.openDevTools();
-  }
-
-  // Emitted when the window is closed.
-  win.on('closed', () => {
-    // Dereference the window object, usually you would store window
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    wins.session_check = null;
-  });
-  wins.session_check = win;
+  // if (serve) {
+  //   win.webContents.openDevTools();
+  // }
   return win;
 }
 export default createSessionCheckWindow;

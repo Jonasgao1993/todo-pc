@@ -7,7 +7,7 @@ var main_1 = require("../main/main");
 var win, serve;
 var args = process.argv.slice(1);
 serve = args.some(function (val) { return val === '--serve'; });
-function createLoginWindow(wins) {
+function createLoginWindow() {
     // const electronScreen = screen;
     // const size = electronScreen.getPrimaryDisplay().workAreaSize;
     // Create the browser window.
@@ -42,11 +42,11 @@ function createLoginWindow(wins) {
         }));
     }
     electron_1.ipcMain.on('SHOW_MAIN_AND_CLOSE_LOGIN', function (event, credentials) {
-        if (!wins.login) {
+        if (!win) {
             return;
         }
-        main_1.default(wins);
-        wins.login.close();
+        main_1.default();
+        win.destroy();
         // globalWin.login = null // not need
     });
     win.once('ready-to-show', function () {
@@ -55,14 +55,20 @@ function createLoginWindow(wins) {
     if (serve) {
         win.webContents.openDevTools();
     }
-    // Emitted when the window is closed.
-    win.on('closed', function () {
-        // Dereference the window object, usually you would store window
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        wins.login = null;
+    electron_1.app.on('activate', function () {
+        if (win) {
+            win.show();
+        }
     });
-    wins.login = win;
+    electron_1.app.on('before-quit', function (event) {
+        if (win) {
+            win.destroy();
+        }
+    });
+    win.on('close', function (event) {
+        event.preventDefault(); // This will cancel the close
+        win.hide();
+    });
     return win;
 }
 exports.default = createLoginWindow;

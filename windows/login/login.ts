@@ -1,4 +1,4 @@
-import { ipcMain, BrowserWindow} from 'electron';
+import { ipcMain, BrowserWindow, app } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import createMainWindow from '../main/main';
@@ -7,7 +7,7 @@ let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
-function createLoginWindow(wins) {
+function createLoginWindow() {
 
   // const electronScreen = screen;
   // const size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -47,9 +47,9 @@ function createLoginWindow(wins) {
   ipcMain.on(
     'SHOW_MAIN_AND_CLOSE_LOGIN',
     (event, credentials) => {
-      if (!wins.login) { return; }
-      createMainWindow(wins);
-      wins.login.close();
+      if (!win) { return; }
+      createMainWindow();
+      win.destroy();
       // globalWin.login = null // not need
     }
   );
@@ -60,15 +60,24 @@ function createLoginWindow(wins) {
   if (serve) {
     win.webContents.openDevTools();
   }
-
-  // Emitted when the window is closed.
-  win.on('closed', () => {
-    // Dereference the window object, usually you would store window
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    wins.login = null;
+  app.on('activate', () => {
+    if (process.platform === 'darwin') {
+      if (win) {
+        win.show();
+      }
+    }
   });
-  wins.login = win;
+  app.on('before-quit', (event) => {
+    if (win) {
+      win.destroy();
+    }
+  });
+  win.on('close', (event) => {
+    if (process.platform === 'darwin') {
+      event.preventDefault();    // This will cancel the close
+      win.hide();
+    }
+  });
   return win;
 }
 export default createLoginWindow;

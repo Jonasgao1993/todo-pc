@@ -8,7 +8,7 @@ var login_1 = require("../login/login");
 var win, serve;
 var args = process.argv.slice(1);
 serve = args.some(function (val) { return val === '--serve'; });
-function createSessionCheckWindow(wins) {
+function createSessionCheckWindow() {
     // const electronScreen = screen;
     // const size = electronScreen.getPrimaryDisplay().workAreaSize;
     // Create the browser window.
@@ -19,9 +19,8 @@ function createSessionCheckWindow(wins) {
         height: 300,
         minWidth: 300,
         minHeight: 300,
-        resizable: true,
-        titleBarStyle: 'hiddenInset',
-        frame: process.platform === 'darwin',
+        resizable: false,
+        frame: false,
         webPreferences: {
             nodeIntegration: true,
         },
@@ -44,36 +43,28 @@ function createSessionCheckWindow(wins) {
     }
     electron_1.ipcMain.on('SHOW_MAIN_AND_CLOSE_SESSION_CHECK', function () {
         console.log('SHOW_MAIN_AND_CLOSE_SESSION_CHECK捕获到了');
-        if (!wins.session_check) {
+        if (!win) {
             return;
         }
-        main_1.default(wins);
-        wins.session_check.close();
+        main_1.default();
+        win.destroy();
         // globalWin.login = null // not need
     });
     electron_1.ipcMain.on('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK', function () {
         console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
-        if (!wins.session_check) {
+        if (!win) {
             return;
         }
-        login_1.default(wins);
-        wins.session_check.close();
+        login_1.default();
+        win.destroy();
         // globalWin.login = null // not need
     });
     win.once('ready-to-show', function () {
         win.show();
     });
-    if (serve) {
-        win.webContents.openDevTools();
-    }
-    // Emitted when the window is closed.
-    win.on('closed', function () {
-        // Dereference the window object, usually you would store window
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        wins.session_check = null;
-    });
-    wins.session_check = win;
+    // if (serve) {
+    //   win.webContents.openDevTools();
+    // }
     return win;
 }
 exports.default = createSessionCheckWindow;

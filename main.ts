@@ -1,13 +1,8 @@
 import { app, BrowserWindow } from 'electron';
 import createSessionCheckWindow from './windows/session-check/session-check';
-const win = {
-  session_check: null,
-  login: null,
-  main: null
-};
+
 function createWindow() {
-  if (win.login || win.main) { return; }
-  createSessionCheckWindow(win);
+  createSessionCheckWindow();
 }
 try {
   // This method will be called when Electron has finished
