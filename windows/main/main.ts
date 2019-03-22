@@ -15,10 +15,10 @@ function createMainWindow(wins) {
   win = new BrowserWindow({
     // width: size.width,
     // height: size.height,
-    width: 1000,
+    width: 1050,
     height: 700,
-    minWidth: 600,
-    minHeight: 400,
+    minWidth: 1050,
+    minHeight: 700,
     resizable: true,
     titleBarStyle: 'hiddenInset',
     frame: process.platform === 'darwin',

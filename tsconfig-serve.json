@@ -18,8 +18,7 @@
   },
   "include": [
     "main.ts",
-    "windows/**/*",
-    "db.json"
+    "windows/**/*"
   ],
   "exclude": [
     "node_modules",

@@ -23,8 +23,7 @@
   "include": [
     "main.ts",
     "src/**/*",
-    "windows/**/*",
-    "db.json"
+    "windows/**/*"
   ],
   "exclude": [
     "node_modules"

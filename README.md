@@ -72,4 +72,6 @@ Windows配置SQLite 3 配置方法
 6、npm install sqlite3 --save
 7、cd到node_module/sqlite3
 8、node-gyp rebuild --target=4.0.0 --arch=x64 --target_platform=win32 --dist-url=https://atom.io/download/electron/ --module_name=node_sqlite3 --module_path=../lib/binding/electron-v4.0-win32-x64
-
+ Mac 配置SQLite 3
+ 1、npm install
+ 2、执行npm run rebuild
