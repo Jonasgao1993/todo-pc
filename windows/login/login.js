@@ -28,7 +28,6 @@ function createLoginWindow() {
     });
     if (serve) {
         require('electron-reload')(__dirname, {
-            // electron: require(`${__dirname}/node_modules/electron`)
             electron: require(path.join(__dirname, '../../node_modules/electron'))
         });
         win.loadURL('http://localhost:4200/#/login');
@@ -47,27 +46,33 @@ function createLoginWindow() {
         }
         main_1.default();
         win.destroy();
-        // globalWin.login = null // not need
     });
     win.once('ready-to-show', function () {
         win.show();
     });
+    // 本地环境的话打开开发者工具
     if (serve) {
         win.webContents.openDevTools();
     }
     electron_1.app.on('activate', function () {
-        if (win) {
-            win.show();
+        if (process.platform === 'darwin') {
+            if (win) {
+                win.show();
+            }
         }
     });
+    // app退出的时候执行，destroy不触发close事件
     electron_1.app.on('before-quit', function (event) {
         if (win) {
             win.destroy();
         }
     });
+    // 页面关闭的时候执行
     win.on('close', function (event) {
-        event.preventDefault(); // This will cancel the close
-        win.hide();
+        if (process.platform === 'darwin') {
+            event.preventDefault(); // This will cancel the close
+            win.hide();
+        }
     });
     return win;
 }

@@ -31,7 +31,6 @@ function createLoginWindow() {
 
   if (serve) {
     require('electron-reload')(__dirname, {
-      // electron: require(`${__dirname}/node_modules/electron`)
       electron: require(path.join(__dirname, '../../node_modules/electron'))
     });
     win.loadURL('http://localhost:4200/#/login');
@@ -50,13 +49,12 @@ function createLoginWindow() {
       if (!win) { return; }
       createMainWindow();
       win.destroy();
-      // globalWin.login = null // not need
     }
   );
   win.once('ready-to-show', () => {
     win.show();
   });
-
+  // 本地环境的话打开开发者工具
   if (serve) {
     win.webContents.openDevTools();
   }
@@ -67,11 +65,13 @@ function createLoginWindow() {
       }
     }
   });
+  // app退出的时候执行，destroy不触发close事件
   app.on('before-quit', (event) => {
     if (win) {
       win.destroy();
     }
   });
+  // 页面关闭的时候执行
   win.on('close', (event) => {
     if (process.platform === 'darwin') {
       event.preventDefault();    // This will cancel the close
