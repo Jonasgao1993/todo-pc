@@ -13,8 +13,6 @@ function createSessionCheckWindow() {
     // const size = electronScreen.getPrimaryDisplay().workAreaSize;
     // Create the browser window.
     win = new electron_1.BrowserWindow({
-        // width: size.width,
-        // height: size.height,
         width: 300,
         height: 300,
         minWidth: 300,
@@ -24,11 +22,10 @@ function createSessionCheckWindow() {
         webPreferences: {
             nodeIntegration: true,
         },
-        show: false
+        show: true
     });
     if (serve) {
         require('electron-reload')(__dirname, {
-            // electron: require(`${__dirname}/node_modules/electron`)
             electron: require(path.join(__dirname, '../../node_modules/electron'))
         });
         win.loadURL('http://localhost:4200/#/session-check');
@@ -42,29 +39,22 @@ function createSessionCheckWindow() {
         }));
     }
     electron_1.ipcMain.on('SHOW_MAIN_AND_CLOSE_SESSION_CHECK', function () {
-        console.log('SHOW_MAIN_AND_CLOSE_SESSION_CHECK捕获到了');
         if (!win) {
             return;
         }
         main_1.default();
         win.destroy();
-        // globalWin.login = null // not need
     });
     electron_1.ipcMain.on('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK', function () {
-        console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
         if (!win) {
             return;
         }
         login_1.default();
         win.destroy();
-        // globalWin.login = null // not need
     });
     win.once('ready-to-show', function () {
         win.show();
     });
-    // if (serve) {
-    //   win.webContents.openDevTools();
-    // }
     return win;
 }
 exports.default = createSessionCheckWindow;

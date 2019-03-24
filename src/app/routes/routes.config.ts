@@ -12,7 +12,7 @@ export const routes = [
             // 布局
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'calerdar', loadChildren: './calerdar/calendar.module#CalendarModule' },
+            { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarModule' },
         ]
     },
     { path: 'login', component: LoginComponent },

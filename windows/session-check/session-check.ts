@@ -15,8 +15,6 @@ function createSessionCheckWindow() {
 
   // Create the browser window.
   win = new BrowserWindow({
-    // width: size.width,
-    // height: size.height,
     width: 300,
     height: 300,
     minWidth: 300,
@@ -26,11 +24,10 @@ function createSessionCheckWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
-    show: false
+    show: true
   });
   if (serve) {
     require('electron-reload')(__dirname, {
-      // electron: require(`${__dirname}/node_modules/electron`)
       electron: require(path.join(__dirname, '../../node_modules/electron'))
     });
     win.loadURL('http://localhost:4200/#/session-check');
@@ -46,30 +43,22 @@ function createSessionCheckWindow() {
   ipcMain.on(
     'SHOW_MAIN_AND_CLOSE_SESSION_CHECK',
     () => {
-      console.log('SHOW_MAIN_AND_CLOSE_SESSION_CHECK捕获到了');
       if (!win) { return; }
       createMainWindow();
       win.destroy();
-      // globalWin.login = null // not need
     }
   );
   ipcMain.on(
     'SHOW_LOGIN_AND_CLOSE_SESSION_CHECK',
     () => {
-      console.log('SHOW_LOGIN_AND_CLOSE_SESSION_CHECK捕获到了');
       if (!win) { return; }
       createLoginWindow();
       win.destroy();
-      // globalWin.login = null // not need
     }
   );
   win.once('ready-to-show', () => {
     win.show();
   });
-
-  // if (serve) {
-  //   win.webContents.openDevTools();
-  // }
   return win;
 }
 export default createSessionCheckWindow;
