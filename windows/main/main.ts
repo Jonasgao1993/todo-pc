@@ -56,10 +56,12 @@ function createMainWindow() {
       }
     }
   });
-  app.on('before-quit', (event) => {
-    if (win) {
-      // 强制关闭窗口, 除了closed之外，close，unload 和 beforeunload 都不会被触发
-      win.destroy();
+  app.on('before-quit', () => {
+    if (process.platform === 'darwin') {
+      if (win) {
+        // 强制关闭窗口, 除了closed之外，close，unload 和 beforeunload 都不会被触发
+        win.destroy();
+      }
     }
   });
   win.on('close', (event) => {
