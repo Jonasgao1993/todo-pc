@@ -13,6 +13,8 @@ export const routes = [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarModule' },
+            { path: 'task', loadChildren: './task/task.module#TaskModule' },
+            { path: 'notebook', loadChildren: './notebook/notebook.module#NotebookModule' },
         ]
     },
     { path: 'login', component: LoginComponent },
