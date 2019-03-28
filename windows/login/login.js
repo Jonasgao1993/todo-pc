@@ -62,9 +62,12 @@ function createLoginWindow() {
         }
     });
     // app退出的时候执行，destroy不触发close事件
-    electron_1.app.on('before-quit', function (event) {
-        if (win) {
-            win.destroy();
+    electron_1.app.on('before-quit', function () {
+        if (process.platform === 'darwin') {
+            if (win) {
+                // 强制关闭窗口, 除了closed之外，close，unload 和 beforeunload 都不会被触发
+                win.destroy();
+            }
         }
     });
     // 页面关闭的时候执行

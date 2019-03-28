@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, Tray } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -42,6 +42,7 @@ function createMainWindow() {
       hash: '/'
     }));
   }
+  win.setMenu(null)
   win.once('ready-to-show', () => {
     win.show();
   });
