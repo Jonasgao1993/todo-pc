@@ -1,7 +1,7 @@
 {
   "name": "todowork",
   "productName":"代办",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Angular 7 Electron (Typescript + Less + Hot Reload) NG_ZOORO（Ant Design UI Framework） SQLite for creating Desktop applications.",
   "homepage": "https://github.com/lukegao1993/todo-pc",
   "author": {
