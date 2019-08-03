@@ -7,11 +7,6 @@ import { FormsModule } from '@angular/forms';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
-
-import { AppRoutingModule } from './app-routing.module';
-=======
->>>>>>> 7953cb6f50771cf83dfbf9a1f984ce2a397f52dc
 
 // NG Translate
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -21,10 +16,6 @@ import { NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-<<<<<<< HEAD
-import { HomeModule } from './home/home.module';
-=======
->>>>>>> 7953cb6f50771cf83dfbf9a1f984ce2a397f52dc
 
 // In Application
 import { AppComponent } from './app.component';
@@ -52,11 +43,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     RoutesModule,
     LayoutModule,
     CoreModule,
-<<<<<<< HEAD
-    HomeModule,
-    AppRoutingModule,
-=======
->>>>>>> 7953cb6f50771cf83dfbf9a1f984ce2a397f52dc
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -9,7 +9,7 @@ export class LayoutComponent {
 
   isCollapsed = true;
   triggerTemplate = null;
-  @ViewChild('trigger') customTrigger: TemplateRef<void>;
+  @ViewChild('trigger',null) customTrigger: TemplateRef<void>;
 
   /** custom trigger can be TemplateRef **/
   changeTrigger(): void {

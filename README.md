@@ -1,26 +1,13 @@
 # Introduction
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 7953cb6f50771cf83dfbf9a1f984ce2a397f52dc
- Angular 7 、Electron (Typescript + Less + Hot Reload) 、NG_ZOORO（Ant Design UI Framework）、SQLite for creating Desktop applications.
-
-Currently runs with:
-
-- Angular v7.2.0
-- Electron v4.0.0
-- SQLite 3
-- Electron Builder v20.28.1
-=======
-Bootstrap and package your project with Angular 8 and Electron (Typescript + SASS + Hot Reload) for creating Desktop applications.
+ Angular 8 、Electron (Typescript + Less + Hot Reload) 、NG_ZOORO（Ant Design UI Framework）、SQLite for creating Desktop applications.
 
 Currently runs with:
 
 - Angular v8.0.0
 - Electron v5.0.2
 - Electron Builder v20.41.0
->>>>>>> angular-electron-master
+- SQLite 3
 
 With this sample, you can :
 
