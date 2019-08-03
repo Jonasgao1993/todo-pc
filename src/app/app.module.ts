@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import '../polyfills';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -45,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (HttpLoaderFactory),
+        useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
     }),
@@ -55,4 +56,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

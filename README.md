@@ -1,19 +1,21 @@
 # Introduction
 
- Angular 7 、Electron (Typescript + Less + Hot Reload) 、NG_ZOORO（Ant Design UI Framework）、SQLite for creating Desktop applications.
+ Angular 8 、Electron (Typescript + Less + Hot Reload) 、NG_ZOORO（Ant Design UI Framework）、SQLite for creating Desktop applications.
 
 Currently runs with:
 
-- Angular v7.2.0
-- Electron v4.0.0
+- Angular v8.0.0
+- Electron v5.0.2
+- Electron Builder v20.41.0
 - SQLite 3
-- Electron Builder v20.28.1
 
 With this sample, you can :
 
 - Run your app in a local development environment with Electron & Hot reload
 - Run your app in a production environment
 - Package your app into an executable file for Linux, Windows & Mac
+
+/!\ Angular 8.0 CLI needs Node 10.9 or later to work.
 
 ## Getting Started
 
