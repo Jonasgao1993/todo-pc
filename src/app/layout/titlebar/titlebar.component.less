@@ -1,0 +1,39 @@
+ #title-bar {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    height: 24px; 
+    padding: none;
+    margin: 0px; 
+    background-color: white;
+    // background-image: url('../../../assets/images/titlebar-bg.jpg');
+    // background-repeat: no-repeat;
+   }
+
+   #title-bar-btns {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    height: 24px;
+   }
+
+   #title-bar-btns li{
+    text-decoration: none;
+    list-style: none;//去掉li前面的圆点
+    display: inline-block;//让li横向排列
+    width: 45px;
+    text-align: center;
+    padding:0px;
+    height: 100%;
+   }
+   #title-bar-btns li:last-child:hover{
+       background-color: red !important;
+       i{
+           color: white;
+       }
+   }
+    #title-bar-btns li:hover{
+    background-color: #e2e2e2;//鼠标经过事件
+    cursor: pointer;
+    }

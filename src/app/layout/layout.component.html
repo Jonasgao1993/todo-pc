@@ -1,0 +1,13 @@
+<nz-layout style="height:100vh">
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+        <app-sidebar></app-sidebar>
+    </nz-sider>
+    <nz-layout>
+        <nz-content style="margin:0px">
+            <app-titlebar></app-titlebar>
+            <router-outlet></router-outlet>
+        </nz-content>
+        <!-- <nz-footer style="text-align: center;">Ant Design ©2019 Implement By Angular</nz-footer> -->
+    </nz-layout>
+</nz-layout>
+<!-- <app-firework></app-firework> -->

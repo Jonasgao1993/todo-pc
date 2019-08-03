@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-electron": {
+    "todowork": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -22,12 +22,24 @@
               "src/favicon.png",
               "src/favicon.icns",
               "src/favicon.256x256.png",
-              "src/favicon.512x512.png"
+              "src/favicon.512x512.png",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/theme.less",
+              "src/styles.less",
+              "./node_modules/fullcalendar/dist/fullcalendar.min.css",
+              "./node_modules/fullcalendar-scheduler/dist/scheduler.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/fullcalendar/dist/fullcalendar.min.js",
+              "./node_modules/fullcalendar-scheduler/dist/scheduler.min.js"
+            ]
           },
           "configurations": {
             "dev": {
@@ -69,21 +81,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-electron:build"
+            "browserTarget": "todowork:build"
           },
           "configurations": {
             "dev": {
-              "browserTarget": "angular-electron:build:dev"
+              "browserTarget": "todowork:build:dev"
             },
             "production": {
-              "browserTarget": "angular-electron:build:production"
+              "browserTarget": "todowork:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-electron:build"
+            "browserTarget": "todowork:build"
           }
         },
         "test": {
@@ -95,7 +107,7 @@
             "karmaConfig": "src/karma.conf.js",
             "scripts": [],
             "styles": [
-              "src/styles.scss"
+              "src/styles.less"
             ],
             "assets": [
               "src/assets",
@@ -121,7 +133,7 @@
         }
       }
     },
-    "angular-electron-e2e": {
+    "todowork-e2e": {
       "root": "e2e",
       "projectType": "application",
       "architect": {
@@ -139,11 +151,11 @@
       }
     }
   },
-  "defaultProject": "angular-electron",
+  "defaultProject": "todowork",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "scss"
+      "styleext": "less"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

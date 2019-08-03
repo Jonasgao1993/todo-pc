@@ -1,6 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "*": ["types/*"] },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -20,7 +22,8 @@
   },
   "include": [
     "main.ts",
-    "src/**/*"
+    "src/**/*",
+    "windows/**/*"
   ],
   "exclude": [
     "node_modules"

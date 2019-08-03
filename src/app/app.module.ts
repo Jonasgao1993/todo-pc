@@ -4,19 +4,30 @@ import '../polyfills';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
 // NG Translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+// NgZorro
+import { NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
 import { HomeModule } from './home/home.module';
 
+// In Application
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { HttpService } from './core/service/http/http.service';
+import { RoutesModule } from './routes/routes.module';
+import { LayoutModule } from './layout/layout.module';
+import { SharedModule } from './shared/shared.module';
+registerLocaleData(zh);
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -24,13 +35,17 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    CoreModule,
     SharedModule,
+    RoutesModule,
+    LayoutModule,
+    CoreModule,
     HomeModule,
     AppRoutingModule,
     TranslateModule.forRoot({
@@ -39,9 +54,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },
+  { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

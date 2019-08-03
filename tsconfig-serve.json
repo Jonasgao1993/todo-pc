@@ -17,7 +17,8 @@
     ]
   },
   "include": [
-    "main.ts"
+    "main.ts",
+    "windows/**/*"
   ],
   "exclude": [
     "node_modules",
