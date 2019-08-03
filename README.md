@@ -1,6 +1,9 @@
 # Introduction
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7953cb6f50771cf83dfbf9a1f984ce2a397f52dc
  Angular 7 、Electron (Typescript + Less + Hot Reload) 、NG_ZOORO（Ant Design UI Framework）、SQLite for creating Desktop applications.
 
 Currently runs with:
