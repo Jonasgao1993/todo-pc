@@ -8,5 +8,4 @@ import { RouterModule } from '@angular/router';
 })
 export class SidebarComponent {
   isCollapsed = true;
-  @ViewChild('trigger') customTrigger: TemplateRef<void>;
 }
